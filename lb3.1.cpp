@@ -7,7 +7,7 @@
 // Структура узла приоритетной очереди
 struct Node {
     char data[256];
-    int priority;  // Приоритет узла
+    int priority;  
     struct Node* next;
 };
 
@@ -69,7 +69,7 @@ char* dequeueQueue(struct Queue* queue) {
     }
 
     struct Node* temp = queue->front;
-    char* data = (char*)malloc(strlen(temp->data) + 1); // Выделяем память под строку
+    char* data = (char*)malloc(strlen(temp->data) + 1); 
     strcpy(data, temp->data);
 
     queue->front = queue->front->next;
@@ -91,13 +91,12 @@ void printQueue(struct Queue* queue) {
 
     struct Node* current = queue->front;
     while (current != NULL) {
-        printf("\"%s\" ", current->data); // Добавляем кавычки для правильного вывода
+        printf("\"%s\" ", current->data); 
         current = current->next;
     }
     printf("\n");
 }
 
-// Добавление элемента в приоритетную очередь
 void enqueuePriorityQueue(struct PriorityQueue* queue, const char* data, int priority) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     strcpy(newNode->data, data);
@@ -126,7 +125,7 @@ char* dequeuePriorityQueue(struct PriorityQueue* queue) {
     }
 
     struct Node* temp = queue->front;
-    char* data = (char*)malloc(strlen(temp->data) + 1); // Выделяем память под строку
+    char* data = (char*)malloc(strlen(temp->data) + 1); 
     strcpy(data, temp->data);
 
     queue->front = queue->front->next;
@@ -144,7 +143,7 @@ void printPriorityQueue(struct PriorityQueue* queue) {
 
     struct Node* current = queue->front;
     while (current != NULL) {
-        printf("\"%s\" ", current->data); // Добавляем кавычки для правильного вывода
+        printf("\"%s\" ", current->data); 
         current = current->next;
     }
     printf("\n");
@@ -152,8 +151,7 @@ void printPriorityQueue(struct PriorityQueue* queue) {
 
 // Функция для получения приоритета (можно изменять для разных задач)
 int getPriority(const char* data) {
-    // В этом примере приоритет определяется длиной строки:
-    return strlen(data);
+   return strlen(data);
 }
 
 int main() {
@@ -168,18 +166,18 @@ int main() {
     printf("Очередь: ");
     printQueue(queue);
 
-    struct PriorityQueue* priorityQueue = createPriorityQueue(); // Создаем приоритетную очередь
+    struct PriorityQueue* priorityQueue = createPriorityQueue(); 
     while (!isEmptyQueue(queue)) {
         char* data = dequeueQueue(queue);
         int priority = getPriority(data);
-        enqueuePriorityQueue(priorityQueue, data, priority); // Вставляем в приоритетную очередь
+        enqueuePriorityQueue(priorityQueue, data, priority); 
         free(data); // Освобождаем память, выделенную для data
     }
 
     printf("Приоритетная очередь: ");
     printPriorityQueue(priorityQueue);
 
-    // Освобождаем память
+    
     free(queue);
     free(priorityQueue);
 
